@@ -5,6 +5,16 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
+const DotEnv = require('dotenv');
+
+const envConfig = DotEnv.config().parsed;
+const env = Object.keys(envConfig).reduce((acc, key) => {
+  if (key.startsWith('VUE_APP_')) {
+    acc[key] = envConfig[key];
+  }
+  return acc;
+}, {});
+
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
@@ -62,7 +72,8 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      env: require('dotenv').config().parsed,
+      // env: require('dotenv').config().parsed,
+      env,
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
@@ -86,6 +97,8 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       config: {},
+      extras: ['mdi-v5'],
+      css: ['@mdi/font/css/materialdesignicons.min.css'],
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
