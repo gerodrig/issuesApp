@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 export const githubApi = axios.create({
-  baseURL: `https://api.github.com/repos/${process.env.VUE_APP_GITHUB_USER}/${process.env.VUE_APP_GITHUB_REPO}`,
+  baseURL: `https://api.github.com/repos/${
+    import.meta.env.GITHUB_USER ?? process.env.GITHUB_USER
+  }/${import.meta.env.GITHUB_REPO ?? process.env.GITHUB_REPO}`,
   headers: {
-    Authorization: `token ${process.env.VUE_APP_GITHUB_TOKEN}`,
+    Authorization: `token ${
+      import.meta.env.GITHUB_TOKEN ?? process.env.GITHUB_TOKEN
+    }`,
   },
 });

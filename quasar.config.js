@@ -5,16 +5,6 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
-const DotEnv = require('dotenv');
-
-const envConfig = DotEnv.config().parsed || {}; // Add an empty object as a fallback
-const env = Object.keys(envConfig).reduce((acc, key) => {
-  if (key.startsWith('VUE_APP_')) {
-    acc[key] = envConfig[key];
-  }
-  return acc;
-}, {});
-
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
@@ -58,9 +48,7 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
-      env: {
-        ...env,
-      },
+      env: require('dotenv').config().parsed,
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
         node: 'node16',
@@ -75,7 +63,7 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: require('dotenv').config().parsed,
+      env: require('dotenv').config().parsed,
       // env,
       // rawDefine: {}
       // ignorePublicFolder: true,
