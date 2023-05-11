@@ -58,7 +58,9 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
-      env: require('dotenv').config().parsed,
+      env: {
+        ...env,
+      },
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
         node: 'node16',
@@ -74,7 +76,7 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       // env: require('dotenv').config().parsed,
-      env,
+      // env,
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
@@ -98,8 +100,7 @@ module.exports = configure(function (/* ctx */) {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       config: {},
-      extras: ['mdi-v5'],
-      css: ['@mdi/font/css/materialdesignicons.min.css'],
+      extras: ['material-icons'],
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
