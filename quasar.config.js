@@ -7,7 +7,7 @@
 
 const DotEnv = require('dotenv');
 
-const envConfig = DotEnv.config().parsed;
+const envConfig = DotEnv.config().parsed || {}; // Add an empty object as a fallback
 const env = Object.keys(envConfig).reduce((acc, key) => {
   if (key.startsWith('VUE_APP_')) {
     acc[key] = envConfig[key];
